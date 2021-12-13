@@ -1,0 +1,40 @@
+version: '3'
+
+volumes:
+  mysql_data:
+    driver: local
+  grafana_storage:
+    driver: local
+services:
+  mysql:
+    image: mysql:5.7
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./mysql/my.cnf:/etc/mysql/my.cnf
+      - ./mysql/initdbs.sql:/docker-entrypoint-initdb.d/init.sql
+    command: --init-file /docker-entrypoint-initdb.d/init.sql
+    networks:
+      - app-network
+    ports:
+      - '3308:3306'
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_ROOT_USER: bluesys
+      MYSQL_PASSWORD: secret
+  app:
+    env_file:
+      - .env
+    container_name: blue-system-be
+    restart: always
+    build: .
+    ports:
+      - 3000:3000
+    depends_on:
+      - mysql
+    links:
+      - mysql
+    networks:
+      - app-network
+networks:
+  app-network:
+    driver: bridge
