@@ -1,0 +1,119 @@
+
+    /* header */
+    .line{
+        height: 1px;
+        border-bottom: 2px solid #384D85;
+        width: 100%;
+    }
+    
+    .copy-header {
+        display: flex;
+        padding-bottom: 30px;
+        border-bottom: 2px solid #384D85;
+    }
+    .copy-header-info,
+    .copy-header-logo {
+        width: 50%;
+        text-align: right;
+    }
+    .copy-header-logo {
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .copy-header-title {
+        font-weight: bold;
+        border-right: 5px solid #384D85;
+        padding-right: 10px;
+        margin-bottom: 10px;
+        color: #384D85;
+    }
+
+
+/*########## items ########## */
+
+
+    .copy-item {
+        margin: 5px 0px;
+        width: 40%;
+        display: flex;
+    }
+
+    .copy-head {
+        width: 40%;
+        display: flex;
+        font-weight: bold;
+    }
+
+    .copy-value {
+        width: 60%;
+    }
+/*########## clauses ########## */
+    .clauses {
+        border: 1px solid #384D85;
+        margin-bottom: 15px;
+    }
+    .clauses-title{
+        background: #384D85;
+        color: #fff;
+        padding: 5px;
+        font-weight: bold;
+    }
+    .clauses-container{
+        padding: 5px;
+        border: #384D85;
+    }
+
+    /*########## commissions ########## */
+    .commissions {
+        padding-top: 10px;
+    }
+    .commissions-item {
+        width: 100%;
+        display: flex;
+    }
+    .commissions-title {
+        width: 40%;
+    }
+    .commissions-value {
+        width: 20%;
+        text-align: center;
+    }
+    .commissions-header {
+        padding-bottom: 5px;
+    }
+
+    .copy-costCoupons{
+        width: 100%;
+        display: flex;
+
+    }
+    .copy-costCoupons-left{
+        width: 70%;
+    }
+    .copy-costCoupons-right{
+        width: 30%;
+        padding-left: 5px;
+        padding-top: 15px;
+    }
+    
+    .copy-costCoupons-item {
+        display: flex;
+        padding-left: 15px;
+        border-left: 1px solid #384D85;
+    }
+
+    .copy-costCoupons-item-head {
+        width: 40%;
+        font-weight: bold;
+        color: #384D85;
+    }
+    .copy-text{
+        margin: 10px 0px;
+    }
+
+    .highlighted{
+        background: #384D85;
+        color: #fff;
+        padding: 2px 5px;
+    }

@@ -1,6 +1,6 @@
 import { IsNotEmpty, IsOptional } from 'class-validator';
 import { AbstractDto } from '../../config/dto/base-dto';
-import { RoleType } from './role.dto';
+import { RoleType, RoleDTO } from './role.dto';
 
 export class CreateUserDTO extends AbstractDto {
   @IsNotEmpty()
@@ -15,8 +15,8 @@ export class CreateUserDTO extends AbstractDto {
   password: string;
   @IsOptional()
   address?: string;
-  @IsOptional()
-  roleType?: string;
+  @IsNotEmpty()
+  roleType: RoleDTO;
 }
 
 export class UserDTO extends AbstractDto {

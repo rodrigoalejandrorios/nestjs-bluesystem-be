@@ -1,11 +1,11 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
 import { RoleDTO } from '../dto/role.dto';
-import { CreateUserDTO, UserDTO } from '../dto/user.dto';
 import { RoleEntity } from '../entity/role.entity';
-import { UserEntity } from '../entity/user.entity';
 import { RoleService } from '../services/role.service';
-import { UserService } from '../services/user.service';
+import { JwtAuthGuard } from '../../auth/guards/jwt-auth.guard';
+import { PublicRoute } from 'src/auth/decorators/public.decorator';
 
+//@UseGuards(JwtAuthGuard)
 @Controller('roles')
 export class RoleController {
   constructor(private readonly roleService: RoleService) {}
@@ -16,8 +16,10 @@ export class RoleController {
   }
 
   @Post()
-  createUser(@Body() createRoleDTO: RoleDTO): Promise<RoleEntity> {
-    return this.roleService.create(createRoleDTO);
+  createUser(@Body() createRoleDTO: RoleDTO[]): Promise<RoleEntity> {
+    let arrayRoles = [];
+    arrayRoles.push(...createRoleDTO);
+    return this.roleService.create(arrayRoles);
   }
 
   @Get(':id')

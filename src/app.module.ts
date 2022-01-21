@@ -9,6 +9,9 @@ import { ConfigModule } from './config/config.module';
 import { UserModule } from './user/user.module';
 import { ProjectModule } from './project/project.module';
 import { TeamModule } from './team/team.module';
+import { DocumentsModule } from './documents/documents.module';
+import { QuoteModule } from './quote/quote.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -19,10 +22,14 @@ import { TeamModule } from './team/team.module';
       useFactory: (configService: ConfigService) => configService.typeORMConfig,
       inject: [ConfigService],
     }),
+
     TaskModule,
     UserModule,
     ProjectModule,
     TeamModule,
+    DocumentsModule,
+    QuoteModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],

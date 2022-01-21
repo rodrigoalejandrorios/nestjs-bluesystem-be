@@ -1,0 +1,210 @@
+<style type="text/css">
+/*Css general */
+
+/*Titulos */
+
+@font-face {
+  font-family: Barcode-128;
+  src: url(assets/fonts/Barcode/BarcodeFont.ttf) format('truetype');
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-size: 10pt;
+  font-family: Barlow-Regular;
+}
+
+.sheet-static {
+  border: 1px solid red;
+  width: 730px;
+  height: 1060px;
+  margin: 40px;
+}
+
+/* width: 730px;
+height: 970px; */
+
+.sheet-dynamic {
+  border: 1px solid rgb(121, 119, 119);
+  width: 730px;
+  min-height: 1060px;
+  margin: 40px;
+}
+
+/* .no-page-break */
+
+.npb {
+  page-break-inside: avoid;
+}
+
+/*
+  200 mm de width
+  288 mm de height
+  */
+
+#img-logoSura {
+  width: 160px;
+  height: 60px;
+}
+
+/*imagenes*/
+
+.logo-sura {
+  width: 160px;
+  height: 60px;
+  content: url('./assets/images/logos/LOGO_SURA.png');
+}
+.logo-answer {
+  width: 160px;
+  height: 60px;
+  content: url('./assets/images/logos/LOGO_ANSWER.jpg');
+}
+
+.logo-cesvi {
+  width: 160px;
+  height: 60px;
+  content: url('./assets/images/logos/LOGO_CESVI.jpg');
+}
+
+.firma-jorge-valencia {
+  width: 120px;
+  content: url('./assets/images/firmas/FIRMA_JORGE_VALENCIA.jpg');
+}
+.firma-leo-martinez {
+  width: 120px;
+  content: url('./assets/images/firmas/FIRMA_LEOMARTINEZ.jpg');
+}
+.firma-sreider {
+  width: 120px;
+  content: url('./assets/images/firmas/FIRMA_SREIDER.jpg');
+}
+.icon-scissors {
+  width: 10px;
+  content: url('./assets/images/iconos/scissors.png');
+}
+
+@page {
+  size: A4;
+  margin: 40px;
+}
+
+@media print {
+  .end-page {
+    page-break-before: always;
+  }
+
+  .sheet-static,
+  .sheet-dynamic {
+    margin: 0px;
+    border: none;
+  }
+}
+
+  /*cartaFranquicia */
+  .cartaFranquicia {
+    position: relative;
+    height: 100%;
+  }
+
+  p {
+      color: #006755;
+  }
+
+  /*
+  cartaFranquicia Info */
+  /* logo*/
+  .header {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 40px;
+    padding-right: 5px;
+  }
+
+  .logoSura img {
+    height: 60px;
+    width: 160px;
+  }
+
+  .insured {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+
+  .dataInsured {
+    padding-top: 8%;
+    line-height: 2.5;
+    text-indent: 25px;
+    text-align: left;
+  }
+
+  .text {
+    line-height: 1.5;
+    text-align: left;
+    padding-top: 12%;
+  }
+
+  .text2 {
+    line-height: 1.5;
+    text-align: left;
+    padding-top: 2%;
+  }
+</style>
+
+<div class="sheet-static">
+
+  {{! indemnification }}
+  <div class="cartaFranquicia">
+
+    {{! infoInsured Info }}
+    <div class="infoInsured-cartaFranquicia">
+      <div class="header">
+        <div>
+          <p>Boulevard Cecilia Grierson 255</p>
+          <p>(C1107AAU) Buenos Aires
+          </p>
+          <p>Tel. (5411) 4339-0000
+          </p>
+          <p>Seguros SURA S.A.
+          </p>
+        </div>
+        {{!-- <div class="logoSura">
+          <div class="logo-sura"></div>       
+        </div> --}}
+      <div class="textFecha">
+        <p>Buenos Aires, 01 de julio de 2021</p>
+      </div>
+      </div>
+      <div class="insured">
+        A quien corresponda:
+      </div>
+      <div class="dataInsured">
+        <p>Nombre: {{name}}</p>
+        <p>Apellido: {{lastname}}</p>
+        <p>Puesto: {{jobPosition}}</p>
+      <h2 class="checho">Holaaa checho</h2>
+      </div>
+     
+
+      <div class="text2">
+
+        Siendo que la franquicia establecida por condiciones de póliza es de $ 1000 ars
+
+      </div>
+
+      <div class="firma">
+        Atte.
+  
+      </div>
+
+
+      {{! footer }}
+
+    </div>
+  </div>
+
+  <div class="end-page"></div>

@@ -1,0 +1,109 @@
+/*Css general */
+
+/*Titulos */
+
+@font-face {
+  font-family: Barcode-128;
+  src: url(assets/fonts/Barcode/BarcodeFont.ttf) format('truetype');
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-size: 10pt;
+  font-family: Barlow-Regular;
+}
+
+.sheet-static {
+  border: 1px solid red;
+  width: 730px;
+  height: 1060px;
+  margin: 40px;
+}
+
+/* width: 730px;
+height: 970px; */
+
+.sheet-dynamic {
+  border: 1px solid rgb(121, 119, 119);
+  width: 730px;
+  min-height: 1060px;
+  margin: 40px;
+}
+
+/* .no-page-break */
+
+.npb {
+  page-break-inside: avoid;
+}
+
+/*
+  200 mm de width
+  288 mm de height
+  */
+
+#img-logoSura {
+  width: 160px;
+  height: 60px;
+}
+
+/*imagenes*/
+
+.logo-sura {
+  width: 160px;
+  height: 60px;
+  content: url('./assets/images/logos/LOGO_SURA.png');
+}
+.logo-answer {
+  width: 160px;
+  height: 60px;
+  content: url('./assets/images/logos/LOGO_ANSWER.jpg');
+}
+
+.logo-cesvi {
+  width: 160px;
+  height: 60px;
+  content: url('./assets/images/logos/LOGO_CESVI.jpg');
+}
+
+.firma-jorge-valencia {
+  width: 120px;
+  content: url('./assets/images/firmas/FIRMA_JORGE_VALENCIA.jpg');
+}
+.firma-leo-martinez {
+  width: 120px;
+  content: url('./assets/images/firmas/FIRMA_LEOMARTINEZ.jpg');
+}
+.firma-sreider {
+  width: 120px;
+  content: url('./assets/images/firmas/FIRMA_SREIDER.jpg');
+}
+.icon-scissors {
+  width: 10px;
+  content: url('./assets/images/iconos/scissors.png');
+}
+
+@page {
+  size: A4;
+  margin: 40px;
+}
+
+@media print {
+  .end-page {
+    page-break-before: always;
+  }
+
+  .sheet-static,
+  .sheet-dynamic {
+    margin: 0px;
+    border: none;
+  }
+}
+
+.checho {
+  color: red;
+}

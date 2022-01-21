@@ -6,8 +6,9 @@ import * as dotenv from 'dotenv';
 @Injectable()
 export class ConfigService {
   constructor() {
+    const nodeEnv = this.nodeEnv ? `.${this.nodeEnv}.` : '.';
     dotenv.config({
-      path: `.env`,
+      path: `${nodeEnv}env`,
     });
   }
 
@@ -16,13 +17,20 @@ export class ConfigService {
   }
 
   public getNumber(key: string): number {
+    //console.log(__dirname);
+
     return Number(this.getEnv(key));
+  }
+
+  get nodeEnv(): string {
+    return this.getEnv('NODE_ENV') || '';
   }
 
   get typeORMConfig(): TypeOrmModuleOptions {
     return {
       entities: [__dirname + '/../**/*.entity{.ts,.js}'],
       migrations: [__dirname + '/../../migrations/*{.ts,.js}'],
+      //cli: { migrationsDir: './migrations' },
       keepConnectionAlive: true,
       type: 'mysql',
       synchronize: true,

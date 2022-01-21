@@ -1,0 +1,41 @@
+
+    .utils_clientInfo {
+        border-bottom: 2px solid #384D85;
+        display: flex;
+        padding-top: 15px;
+        padding-bottom: 15px;
+        flex-wrap: wrap;
+        width: 100%;
+    }
+
+
+    .utils_clientInfo-left,
+    .utils_clientInfo-right {
+        width: 50%;
+        padding-left: 15px;
+    }
+
+    .utils_clientInfo-item {
+        width: 100%;
+        display: flex;
+    }
+
+    .utils_clientInfo-item-head {
+        width: 30%;
+        display: flex;
+        font-weight: bold;
+        font-size: 10pt;
+        color: #384D85;
+    }
+
+    .utils_clientInfo-item-value {
+        width: 70%;
+        font-size: 9pt;
+    }
+
+.w-100{
+    width: 100%;
+}
+.w-50{
+    width: 50%;
+}

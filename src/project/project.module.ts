@@ -9,12 +9,21 @@ import { VisibilityService } from './services/visibility.service';
 import { RoleProjectRepository } from './repository/role-project.repository';
 import { RoleProjectController } from './controllers/role-project.controller';
 import { RoleProjectService } from './services/role-project.service';
+import { RoleTeamRepository } from 'src/team/repository/role.team.repository';
+import { UserRepository } from 'src/user/repository/user.repository';
+import { TeamRepository } from '../team/repository/team.repository';
+import { RoleRepository } from '../user/repository/role.repository';
 
 @Module({
   imports: [
     TypeOrmModule.forFeature([
       ProjectRepository,
       VisibilityRepository,
+      RoleProjectRepository,
+      RoleTeamRepository,
+      UserRepository,
+      TeamRepository,
+      RoleRepository,
       RoleProjectRepository,
     ]),
   ],

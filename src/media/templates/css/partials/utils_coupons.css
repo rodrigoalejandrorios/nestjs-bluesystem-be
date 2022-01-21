@@ -1,0 +1,125 @@
+
+.utils_coupons{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width: 100%;   
+    font-size: 10pt;
+
+    display: grid;
+    grid-template-columns: repat(2,1fr);
+    grid-template-rows: repat(7,1fr);
+
+    grid-template-areas: "quota1-tittle quota7-tittle"
+                            "quota1 quota7"
+                            "quota2 quota8"
+                            "quota3 quota9"
+                            "quota4 quota10"
+                            "quota5 quota11"
+                            "quota6 quota12";
+}
+
+.utils_coupons-colm1,
+.utils_coupons-colm2,
+.utils_coupons-colm3,
+.utils_coupons-colm4,
+.utils_coupons-colm5,
+.utils_coupons-colm6,
+.utils_coupons-colm7,
+.utils_coupons-colm8,
+.utils_coupons-colm9,
+.utils_coupons-colm10,
+.utils_coupons-colm11,
+.utils_coupons-colm12{
+display: flex;
+}
+
+
+/* cuotas  */
+.utils_coupons-colm1{
+    grid-area: quota1;
+
+}
+.utils_coupons-colm2{
+    grid-area: quota2;
+
+}
+.utils_coupons-colm3{
+    grid-area: quota3;
+
+}
+.utils_coupons-colm4{
+    grid-area: quota4;
+
+}
+.utils_coupons-colm5{
+    grid-area: quota5;
+
+}
+.utils_coupons-colm6{
+    grid-area: quota6;
+
+}
+.utils_coupons-colm7{
+    grid-area: quota7;
+
+}
+.utils_coupons-colm8{
+    grid-area: quota8;
+
+}
+.utils_coupons-colm9{
+    grid-area: quota9;
+
+}
+.utils_coupons-colm10{
+    grid-area: quota10;
+
+}
+.utils_coupons-colm11{
+    grid-area: quota11;
+
+}
+.utils_coupons-colm12{
+    grid-area: quota12;
+
+}
+
+/* tittles */
+
+.quota1-tittle{
+    grid-area: quota1-tittle;
+    display: flex;
+    font-weight: bold;
+    padding-bottom: 10px;
+    background: #384D85;
+    color: #fff;
+    padding: 2px;
+    margin-bottom: 2px;
+}
+
+.quota7-tittle{
+    grid-area: quota7-tittle;
+    display: flex;
+    font-weight: bold;
+    padding-bottom: 10px;
+    background: #384D85;
+    color: #fff;
+    padding: 2px;
+    margin-bottom: 2px;
+
+}
+
+
+.utils_coupons-quota{
+    width:10%;
+    text-align: center;
+}
+.utils_coupons-date,
+.utils_coupons-amount {
+    width:45%;
+    text-align: center;
+}
+
+.t-c{
+    text-align: center;
+}

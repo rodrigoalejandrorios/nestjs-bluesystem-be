@@ -20,9 +20,7 @@ export class RoleProjectController {
   }
 
   @Post()
-  createRoleProject(
-    @Body() visibilityDTO: RoleDTO,
-  ): Promise<RoleProjectEntity> {
+  createRoleProject(@Body() visibilityDTO: any): Promise<RoleProjectEntity> {
     return this.roleProjectService.create(visibilityDTO);
   }
 }

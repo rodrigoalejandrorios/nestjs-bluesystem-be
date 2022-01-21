@@ -18,7 +18,7 @@ export class BaseService<T extends BaseEntity> {
   async findOne(id: string, errMsg?: string): Promise<T> {
     const found = await this.globalRespository.findOne(id);
 
-    if (found === null || found === undefined) {
+    if (!found || found === null || found === undefined) {
       throw new NotFoundException(errMsg);
     }
 
