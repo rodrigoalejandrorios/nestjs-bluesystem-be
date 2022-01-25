@@ -34,8 +34,10 @@ export class StatusController {
   }
 
   @Post()
-  createStatus(@Body() createStatusDTO: TaskStatusDTO): Promise<StatusEntity> {
-    return this.statusService.create(createStatusDTO);
+  createStatus(
+    @Body() createStatusDTO: TaskStatusDTO[],
+  ): Promise<StatusEntity[]> {
+    return this.statusService.createStatus(createStatusDTO);
   }
 
   @Delete(':id')
@@ -48,7 +50,7 @@ export class StatusController {
     @Param('id') id: string,
     @Body() updateTaskStatus: TaskStatusDTO,
   ): Promise<TaskStatusDTO> {
-    const { name } = updateTaskStatus;
-    return this.statusService.update(id, name);
+    const { statusName } = updateTaskStatus;
+    return this.statusService.update(id, statusName);
   }
 }

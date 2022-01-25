@@ -11,7 +11,7 @@ import { RoleRepository } from 'src/user/repository/role.repository';
 import { UserRepository } from 'src/user/repository/user.repository';
 import { RoleTeamEntity } from '../entity/role-team.entity';
 import { TeamEntity } from '../entity/team.entity';
-import { ObjectTeam } from '../interfaces/role-user-team';
+import { ObjectTeam, ObjectTeamAddRole } from '../interfaces/role-user-team';
 import { RoleTeamRepository } from '../repository/role.team.repository';
 import { TeamRepository } from '../repository/team.repository';
 
@@ -32,7 +32,13 @@ export class TeamService extends BaseService<TeamEntity> {
     });
   }
 
-  async createTeamByUser(bodyTeam: any, id): Promise<any> {
+  findTeamWithProjects(id: string): Promise<TeamEntity> {
+    return this.teamRepository.findOne(id, {
+      relations: ['projects'],
+    });
+  }
+
+  async createTeamByUser(bodyTeam: any, id: string | any): Promise<any> {
     const user = await this.userRepository.findOne({
       where: { id: id },
       relations: ['roleType'],
@@ -78,22 +84,34 @@ export class TeamService extends BaseService<TeamEntity> {
     }
   }
 
-  async addRoleAndTeamToUser(id, bodyIds): Promise<RoleTeamEntity[]> {
+  async addRoleAndTeamToUser(
+    userId: string,
+    teamId: string | any,
+    bodyIds: ObjectTeamAddRole,
+  ): Promise<RoleTeamEntity> {
     const userHaveAdminRole = await this.roleTeamRepository
       .createQueryBuilder('userAdmin')
-      .where('userAdmin.user = :userId', { userId: id })
+      .leftJoinAndSelect('userAdmin.user', 'user')
+      .leftJoinAndSelect('userAdmin.team', 'team')
+      .where('userAdmin.user = :userId', { userId: userId })
+      .andWhere('userAdmin.team = :teamId', { teamId: teamId })
       .innerJoin('userAdmin.role', 'role', 'role.roleType = :roleType', {
-        roleType: 'ADMIN',
+        roleType: RoleType.ADMIN,
       })
-      .getMany();
+      .getOne();
 
     const userIsAdminGlobal = await (
-      await this.userRepository.findOne(id, { relations: ['roleType'] })
+      await this.userRepository.findOne(userId, { relations: ['roleType'] })
     ).roleType.roleType;
 
     try {
-      if (userHaveAdminRole.length > 0 || userIsAdminGlobal === 'ADMIN') {
-        return await this.roleTeamRepository.save(bodyIds);
+      if (userHaveAdminRole || userIsAdminGlobal === RoleType.ADMIN) {
+        const roleAndTeamBody: ObjectTeam = {
+          role: bodyIds.role,
+          user: bodyIds.user,
+          team: teamId,
+        };
+        return this.roleTeamRepository.save(roleAndTeamBody);
       } else {
         throw new UnauthorizedException(
           'No tienes permisos para determinada accion',

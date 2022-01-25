@@ -12,4 +12,9 @@ export class StatusService extends BaseService<StatusEntity> {
   ) {
     super(statusRepository);
   }
+
+  createStatus(bodySatus): Promise<StatusEntity[]> {
+    const body = [...bodySatus];
+    return this.statusRepository.save(body);
+  }
 }

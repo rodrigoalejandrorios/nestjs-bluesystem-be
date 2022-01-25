@@ -1,10 +1,11 @@
 import { ClassSerializerInterceptor, ValidationPipe } from '@nestjs/common';
 import { NestFactory, Reflector } from '@nestjs/core';
+import * as cookieParser from 'cookie-parser';
+import * as fileupload from 'express-fileupload';
 import * as morgan from 'morgan';
 import { AppModule } from './app.module';
 import { ConfigModule } from './config/config.module';
 import { ConfigService } from './config/config.service';
-import * as fileupload from 'express-fileupload';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -24,6 +25,7 @@ async function bootstrap() {
     credentials: true,
   });
 
+  app.use(cookieParser());
   app.use(morgan('dev'));
 
   app.use(

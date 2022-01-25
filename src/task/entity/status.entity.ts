@@ -6,7 +6,7 @@ import { TaskEntity } from './task.entity';
 @Entity({ name: 'status' })
 export class StatusEntity extends BaseEntity {
   @Column({ nullable: false })
-  name: string;
+  statusName: string;
 
   @Column({
     type: 'enum',
@@ -14,7 +14,7 @@ export class StatusEntity extends BaseEntity {
     default: TaskStatus.OPEN,
     nullable: false,
   })
-  mode: TaskStatus;
+  statusType: TaskStatus;
 
   @OneToMany(() => TaskEntity, (tasks) => tasks.status)
   tasks: TaskEntity[];
