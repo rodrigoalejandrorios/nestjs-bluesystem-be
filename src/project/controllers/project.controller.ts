@@ -41,7 +41,7 @@ export class ProjectController {
     return this.projectService.findProjectWithDetails(id);
   }
 
-  @Roles(RoleType.ADMIN)
+  @Roles(RoleType.ADMIN, RoleType.BASIC)
   @Post('user/:userId/team/:teamId')
   createProject(
     @Param('userId') userId: string,

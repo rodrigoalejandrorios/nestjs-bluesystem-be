@@ -12,18 +12,26 @@ export class TaskEntity extends BaseEntity {
   @Column({ nullable: true, length: 3000 })
   description: string;
 
-  @Column('json', { nullable: true })
-  requirements: string[];
+  @Column({ type: 'json', nullable: true })
+  tags: string[];
 
-  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+  @Column({
+    nullable: false,
+    type: 'timestamp',
+    default: () => 'CURRENT_TIMESTAMP',
+  })
   dateStart: Date;
 
   @Column({ nullable: true })
   dateEnd: Date;
 
-  @ManyToOne(() => UserEntity, (user) => user.tasks)
-  @JoinColumn({ name: 'user_id' })
-  user: UserEntity;
+  @ManyToOne(() => UserEntity, (user) => user.tasksCreate)
+  @JoinColumn({ name: 'creator_user_id' })
+  creatorUser: UserEntity;
+
+  @ManyToOne(() => UserEntity, (user) => user.tasksResponsable)
+  @JoinColumn({ name: 'responsable_user_id' })
+  responsableUser: UserEntity;
 
   @ManyToOne(() => StatusEntity, (status) => status.tasks)
   @JoinColumn({ name: 'status_id' })

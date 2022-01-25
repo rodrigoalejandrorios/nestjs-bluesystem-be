@@ -7,3 +7,7 @@ export interface ObjectTeam {
   user: UserEntity;
   team: TeamEntity;
 }
+export interface ObjectTeamAddRole {
+  role: RoleEntity;
+  user: UserEntity;
+}

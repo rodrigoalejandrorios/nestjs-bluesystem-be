@@ -19,7 +19,8 @@ export class UserService extends BaseService<UserEntity> {
     const findUser = await this.userRepository.findOne(id, {
       relations: [
         'roleType',
-        'tasks',
+        'tasksCreate',
+        'tasksResponsable',
         'projects',
         'projects.role',
         'projects.project',

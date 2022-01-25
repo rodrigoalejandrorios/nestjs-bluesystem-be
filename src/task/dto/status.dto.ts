@@ -11,11 +11,11 @@ export enum TaskStatus {
 
 export class TaskStatusDTO extends AbstractDto {
   @IsNotEmpty()
-  name: string;
+  statusName: string;
 
   @IsNotEmpty()
   @IsEnum(TaskStatus)
-  mode: TaskStatus;
+  statusType: TaskStatus;
 
   @IsOptional()
   tasks?: TaskDTO[];

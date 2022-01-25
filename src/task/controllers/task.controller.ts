@@ -9,13 +9,14 @@ import {
   Patch,
   Post,
 } from '@nestjs/common';
+import { ProjectEntity } from 'src/project/entity/project.entity';
 import { TaskStatusDTO } from '../dto/status.dto';
 import { TaskDTO, TaskUpdateDTO } from '../dto/task.dto';
 
 import { TaskEntity } from '../entity/task.entity';
 import { TaskService } from '../services/task.service';
 
-@Controller('task')
+@Controller('tasks')
 export class TaskController {
   constructor(private readonly tasksService: TaskService) {}
 
@@ -40,9 +41,17 @@ export class TaskController {
     return this.tasksService.findOneWithDetail(id);
   }
 
-  @Post()
-  createTask(@Body() createTaskDTO: TaskDTO): Promise<TaskEntity> {
-    return this.tasksService.create(createTaskDTO);
+  @Post('userCreator/:userId/project/:projectId')
+  createTask(
+    @Param('userId') userId,
+    @Param('projectId') projectId: ProjectEntity,
+    @Body() createTaskDTO: TaskDTO,
+  ): Promise<TaskEntity> {
+    return this.tasksService.createTaskByUserIntoTeam(
+      userId,
+      projectId,
+      createTaskDTO,
+    );
   }
 
   @Delete(':id')

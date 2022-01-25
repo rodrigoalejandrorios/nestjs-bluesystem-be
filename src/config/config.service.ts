@@ -17,8 +17,6 @@ export class ConfigService {
   }
 
   public getNumber(key: string): number {
-    //console.log(__dirname);
-
     return Number(this.getEnv(key));
   }
 

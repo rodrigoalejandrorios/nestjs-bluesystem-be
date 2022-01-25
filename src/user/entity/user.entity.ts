@@ -12,7 +12,7 @@ import { RoleEntity } from './role.entity';
 
 @Entity({ name: 'users' })
 export class UserEntity extends BaseEntity {
-  @Column({ nullable: false })
+  @Column({ nullable: false, unique: true })
   username: string;
 
   @Column({ nullable: false })
@@ -21,7 +21,7 @@ export class UserEntity extends BaseEntity {
   @Column({ nullable: false })
   lastname: string;
 
-  @Column({ nullable: false })
+  @Column({ nullable: false, unique: true })
   email: string;
 
   @Exclude()
@@ -46,8 +46,11 @@ export class UserEntity extends BaseEntity {
   @OneToMany(() => RoleTeamEntity, (roleType) => roleType.user)
   teams: RoleTeamEntity[];
 
-  @OneToMany(() => TaskEntity, (tasks) => tasks.user)
-  tasks: TaskEntity[];
+  @OneToMany(() => TaskEntity, (tasks) => tasks.creatorUser)
+  tasksCreate: TaskEntity[];
+
+  @OneToMany(() => TaskEntity, (tasks) => tasks.responsableUser)
+  tasksResponsable: TaskEntity[];
 
   @OneToMany(() => DocumentsEntity, (documents) => documents.user)
   documents: DocumentsEntity[];

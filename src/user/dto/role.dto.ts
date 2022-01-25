@@ -1,8 +1,9 @@
-import { IsNotEmpty, IsOptional } from 'class-validator';
+import { IsNotEmpty } from 'class-validator';
 import { AbstractDto } from 'src/config/dto/base-dto';
 
 export enum RoleType {
   STAKEHOLDER = 'STAKEHOLDER',
+  VIEWER = 'VIEWER',
   BASIC = 'BASIC',
   ADMIN = 'ADMIN',
 }

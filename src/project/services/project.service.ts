@@ -34,11 +34,7 @@ export class ProjectService extends BaseService<ProjectEntity> {
 
   findProjectWithDetails(id: string): Promise<ProjectEntity> {
     return this.projectRepository.findOne(id, {
-      relations: [
-        'roleProjectType',
-        'roleProjectType.user',
-        'roleProjectType.team',
-      ],
+      relations: ['team', 'roleProjectType', 'roleProjectType.user', 'tasks'],
     });
   }
 
@@ -53,21 +49,25 @@ export class ProjectService extends BaseService<ProjectEntity> {
       await this.userRepository.findOne(userId, { relations: ['roleType'] })
     ).roleType.roleType;
 
-    const userHaveAdminRoleInTeam: RoleTeamEntity[] =
-      await this.roleTeamRepository
-        .createQueryBuilder('userAdmin')
-        .where('userAdmin.user = :userId', { userId: userId })
-        .innerJoin('userAdmin.role', 'role', 'role.roleType = :roleType', {
-          roleType: 'ADMIN',
-        })
-        .getMany();
+    const userHaveAdminRoleInTeam = await this.roleTeamRepository
+      .createQueryBuilder('userAdmin')
+      .leftJoinAndSelect('userAdmin.user', 'user')
+      .leftJoinAndSelect('userAdmin.team', 'team')
+      .where('userAdmin.user = :userId', { userId: userId })
+      .andWhere('userAdmin.team = :teamId', { teamId: teamId })
+      .innerJoin('userAdmin.role', 'role', 'role.roleType = :roleType', {
+        roleType: RoleType.ADMIN,
+      })
+      .getOne();
+
+    const isAdmin = await this.roleRepository.findOne({
+      where: { roleType: RoleType.ADMIN },
+    });
 
     try {
-      if (userIsAdminGlobal === 'ADMIN') {
+      if (userIsAdminGlobal === RoleType.ADMIN) {
         if (ifTeamExist) {
-          const isAdmin = await this.roleRepository.findOne({
-            where: { roleType: RoleType.ADMIN },
-          });
+          bodyProject.team = teamId;
           const project = await this.projectRepository.save(bodyProject);
           const projectId: any = await this.projectRepository.findOne({
             where: { id: project.id },
@@ -85,9 +85,6 @@ export class ProjectService extends BaseService<ProjectEntity> {
         }
       } else if (userHaveAdminRoleInTeam) {
         if (ifTeamExist) {
-          const isAdmin = await this.roleRepository.findOne({
-            where: { roleType: RoleType.ADMIN },
-          });
           const project = await this.projectRepository.save(bodyProject);
           const projectId: any = await this.projectRepository.findOne({
             where: { id: project.id },
@@ -97,7 +94,7 @@ export class ProjectService extends BaseService<ProjectEntity> {
             role: isAdmin,
             user: userId,
             project: projectId.id,
-            team: teamId.id,
+            team: teamId,
           };
 
           await this.roleProjectRepository.save(body);
