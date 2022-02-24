@@ -22,7 +22,7 @@ import { UserRepository } from 'src/user/repository/user.repository';
         return {
           secret: configService.getEnv('JWT_SECRET'),
           signOptions: {
-            expiresIn: '1d',
+            expiresIn: '1h',
           },
         };
       },
@@ -32,5 +32,6 @@ import { UserRepository } from 'src/user/repository/user.repository';
   ],
   providers: [AuthService, LocalStrategy, JwtStrategy],
   controllers: [AuthController],
+  exports: [AuthService],
 })
 export class AuthModule {}

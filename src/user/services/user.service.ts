@@ -57,4 +57,7 @@ export class UserService extends BaseService<UserEntity> {
     });
     return userByEmail;
   }
+
+  //Create reset password
+  //----------------------------------------------------------------
 }

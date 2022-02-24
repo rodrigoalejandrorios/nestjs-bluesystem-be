@@ -22,7 +22,6 @@ import { AuthModule } from './auth/auth.module';
       useFactory: (configService: ConfigService) => configService.typeORMConfig,
       inject: [ConfigService],
     }),
-
     TaskModule,
     UserModule,
     ProjectModule,
