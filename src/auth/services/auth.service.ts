@@ -39,7 +39,9 @@ export class AuthService {
     return null;
   }
 
-  async generateJWT(user: UserEntity) {
+  async generateJWT(
+    user: UserEntity,
+  ): Promise<{ accessToken: string; user: UserEntity }> {
     const userConsult = await this.userRepository.findOne({
       where: { id: user.id },
       relations: ['roleType'],
@@ -55,4 +57,6 @@ export class AuthService {
       user,
     };
   }
+
+  //Forgot password service
 }

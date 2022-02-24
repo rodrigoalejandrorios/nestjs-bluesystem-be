@@ -1,4 +1,4 @@
-version: '3'
+version: '3.1'
 
 services:
   bluesys_db:
@@ -15,3 +15,15 @@ services:
       MYSQL_USER: bluesys_user
       MYSQL_ROOT_PASSWORD: secret
       MYSQL_PASSWORD: secret
+  bs_mongo:
+    container_name: bs_mongo
+    restart: always
+    image: mongo:latest
+    volumes:
+      - ./mongo:/data/db
+    ports:
+      - '27017:27017'
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=app_user
+      - MONGO_INITDB_ROOT_PASSWORD=secret
+      - MONGO_INITDB_DATABASE=db_bluesys

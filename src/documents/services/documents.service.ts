@@ -21,10 +21,10 @@ export class DocumentsService extends BaseService<DocumentsEntity> {
     super(documentsRepository);
   }
 
-  async compile(templateName: string, data): Promise<string> {
+   async compile(templateName: string, data): Promise<string> {
     const filePath = path.join(
       process.cwd(),
-      'src/media/templates',
+      'src/assets/templates',
       `${templateName}.hbs`,
     );
 

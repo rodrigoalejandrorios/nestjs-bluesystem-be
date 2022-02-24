@@ -2,11 +2,14 @@ import { Controller, Get, Param, Res } from '@nestjs/common';
 import { DocumentsEntity } from '../entity/documents.entity';
 import { DocumentsService } from '../services/documents.service';
 
-import { bufferToBase64 } from '../utils/buffertoBase64';
+import { UtilsDocumens } from '../utils/utilsDocuments';
 
 @Controller('documents')
 export class DocumentsController {
-  constructor(private readonly docService: DocumentsService) {}
+  constructor(
+    private readonly docService: DocumentsService,
+    private readonly utilsService: UtilsDocumens,
+  ) {}
   @Get('generate/:id')
   async getPDF(@Param('id') id: string, @Res() res): Promise<Buffer> {
     const buffer = await this.docService.generatePDFByUser(id);
@@ -16,8 +19,8 @@ export class DocumentsController {
       'Content-Disposition': `attachment; filename=DOC${Date.now()}.pdf`,
       //'Content-Length': buffer.length,
     });
-
-    return res.end(buffer);
+    res.send(buffer);
+    return buffer;
   }
 
   @Get(':id')
@@ -28,7 +31,7 @@ export class DocumentsController {
 
     if (Buffer.isBuffer(base64)) {
       const data = new Uint8Array(base64);
-      const decode = bufferToBase64(data);
+      const decode = this.utilsService.bufferToBase64(data);
       comprime = Buffer.from(decode, 'base64');
     } else {
       comprime = Buffer.from(base64, 'base64');
@@ -39,8 +42,8 @@ export class DocumentsController {
       'Content-Disposition': `attachment; filename=DOC${Date.now()}.pdf`,
       //'Content-Length': buffer.length,
     });
-
-    return res.end(comprime);
+    res.send(comprime);
+    return comprime;
   }
 
   @Get('user/:id')
